@@ -1,5 +1,7 @@
 from typing import List, Optional
 from pydantic import BaseModel, EmailStr
+from uuid import UUID, uuid4
+from enum import Enum
 
 class Posts(BaseModel):
     title: str
@@ -33,3 +35,24 @@ class UserIn(BaseModel):
     password: str
     email: EmailStr
     fullname: str | None=None
+
+
+# day 2 practice
+# advancing to more complex apis
+class Gender(str, Enum):
+    male = "male"
+    female = "female"
+    
+class Role(str, Enum):
+    admin = "admin"
+    user = "user"
+    student = "student"
+
+class User(BaseModel):
+    id: Optional [UUID] = uuid4()
+    firstName:Optional [UUID] = uuid4()
+    lastName: str
+    # middleName: str | None = None
+    middleName: Optional[str] = None
+    gender: Gender
+    roles:List[Role]
